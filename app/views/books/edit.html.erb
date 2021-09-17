@@ -1,0 +1,45 @@
+<body>
+    <h1>Editing Book</h1>
+
+<%= form_with url:book_path(@book.id),model:@book ,local: true do |form|  %>
+  <% if @book.errors.any? %>
+    <div class = "alert">
+        <ul>
+        <% @book.errors.full_messages.each do |message| %>
+            <li style="color:red;"><%= message %></li>
+        <% end %>
+        </ul>
+    </div>
+  <% end %> 
+  
+  <div class="field">
+     <% if @book.errors.include?(:title)%>
+        <span style="color:red;"><%= form.label :title %></span>
+    <% else %>
+        <%= form.label :title %>
+    <% end %>
+
+    <%= form.text_field :title ,value: @book.title%>
+  </div>
+
+  <div class="field">
+     <% if @book.errors.include?(:body)%>
+        <span style="color:red;"><%= form.label :body %></span>
+    <% else %>
+        <%= form.label :body %>
+    <% end %>
+
+    <%= form.text_area :body ,value: @book.body%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', book_path(@book.id) %> |
+<%= link_to 'Back', books_path %>
+
+  
+
+</body>
